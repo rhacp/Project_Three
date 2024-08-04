@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cu4rcvediys2v"]
+
+[ext_resource type="Script" path="res://level/utils/transition.gd" id="1_y44iq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i5152"]
+size = Vector2(46, 44)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_17awf"]
+size = Vector2(20, 32)
+
+[node name="Transition" type="Area2D"]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("1_y44iq")
+
+[node name="TransitionCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_i5152")
+
+[node name="AccessTransition" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 2
+
+[node name="AccessCollision" type="CollisionShape2D" parent="AccessTransition"]
+shape = SubResource("RectangleShape2D_17awf")
+debug_color = Color(0.71163, 0.480797, 0.179257, 0.42)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="AccessTransition" to="." method="_on_access_transition_body_entered"]
