@@ -1,3 +1,4 @@
+class_name Key
 extends Area2D
 
 ### manages the pickable key for passing tot he next level

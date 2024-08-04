@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://8hqxwgqb6u8j"]
+[gd_scene load_steps=26 format=3 uid="uid://8hqxwgqb6u8j"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_nodde"]
 [ext_resource type="Texture2D" uid="uid://d4fx7v5mfjsus" path="res://assets/player/player.png" id="1_ywiw1"]
@@ -7,6 +7,15 @@
 [ext_resource type="Script" path="res://player/Run.gd" id="4_snowe"]
 [ext_resource type="Script" path="res://player/Jump.gd" id="5_11cav"]
 [ext_resource type="Script" path="res://player/Fall.gd" id="6_d2ren"]
+[ext_resource type="Script" path="res://player/Death.gd" id="8_tvycf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7lpj4"]
+atlas = ExtResource("1_ywiw1")
+region = Rect2(0, 128, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwdn2"]
+atlas = ExtResource("1_ywiw1")
+region = Rect2(33, 128, 33, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3adr4"]
 atlas = ExtResource("1_ywiw1")
@@ -58,6 +67,17 @@ region = Rect2(165, 32, 33, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_h20q1"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7lpj4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fwdn2")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3adr4")
@@ -118,16 +138,27 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_46k00"]
 height = 24.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eguyk"]
+height = 24.0
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
-collision_mask = 13
+collision_mask = 9
 script = ExtResource("1_nodde")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -223.0
+offset_top = -131.0
+offset_right = -112.0
+offset_bottom = -125.0
+max_value = 20.0
+step = 1.0
+show_percentage = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_h20q1")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.872588
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 5)
@@ -137,12 +168,20 @@ shape = SubResource("CapsuleShape2D_46k00")
 position = Vector2(0, 6)
 zoom = Vector2(2, 2)
 
+[node name="PlayerArea" type="Area2D" parent="." groups=["PlayerArea"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerArea"]
+position = Vector2(-1, 5)
+shape = SubResource("CapsuleShape2D_eguyk")
+debug_color = Color(0.78706, 0.317606, 0.741711, 0.42)
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("2_4kphl")
 current_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine"]
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("3_ecx8v")
+player = NodePath("../..")
 
 [node name="Run" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("4_snowe")
@@ -155,3 +194,9 @@ player = NodePath("../..")
 [node name="Fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("6_d2ren")
 player = NodePath("../..")
+
+[node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("8_tvycf")
+player = NodePath("../..")
+
+[connection signal="area_entered" from="PlayerArea" to="." method="_on_player_area_area_entered"]

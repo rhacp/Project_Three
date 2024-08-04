@@ -12,9 +12,11 @@ func enter_state():
 	
 # 2. update, do stuff
 func update(delta : float):
-	if !player.is_on_floor():
-		player.velocity.y += player.gravity * delta
+	# gravity
+	#if (!player.is_on_floor()):
+		#player.velocity.y += player.gravity * delta
 	
+	# second jump
 	if (!player.is_on_floor() && InputManager.get_input_jump() && player.jump_counter < player.jump_limit):
 		player.velocity.y = player.JUMP_VELOCITY
 		player.jump_counter += 1
@@ -22,13 +24,13 @@ func update(delta : float):
 	var direction = InputManager.get_direction()
 	
 	# movement
-	if (direction):
+	if (direction && player.ignore_input == false):
 		player.velocity.x = direction * player.SPEED
 		
 	# change animation
-	if (direction == -1):
+	if (direction == -1 && player.ignore_input == false):
 		animated_sprite_2d.flip_h = true
-	if (direction == 1):
+	if (direction == 1 && player.ignore_input == false):
 		animated_sprite_2d.flip_h = false
 		
 	if (player.is_on_floor()):

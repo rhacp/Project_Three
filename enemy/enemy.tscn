@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://boiql7hbhtdq8"]
+[gd_scene load_steps=26 format=3 uid="uid://boiql7hbhtdq8"]
 
 [ext_resource type="Script" path="res://enemy/enemy.gd" id="1_dx106"]
 [ext_resource type="Texture2D" uid="uid://d1decvbyiqe5" path="res://assets/enemies/Idle_2_52x54.png" id="1_imdis"]
@@ -136,20 +136,23 @@ animations = [{
 radius = 18.0072
 height = 36.0144
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5m1nl"]
+radius = 18.0
+height = 36.0
+
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 4
 script = ExtResource("1_dx106")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_y24v6")
-animation = &"chase"
+animation = &"idle"
 autoplay = "idle"
-frame = 6
-frame_progress = 0.244907
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = -1.57853
 shape = SubResource("CapsuleShape2D_nlsf0")
+debug_color = Color(0.220242, 0.632461, 0.268164, 0.42)
 
 [node name="RightRayCast" type="RayCast2D" parent="."]
 position = Vector2(28, 0)
@@ -158,6 +161,12 @@ target_position = Vector2(14, 0)
 [node name="LeftRayCast" type="RayCast2D" parent="."]
 position = Vector2(-28, 0)
 target_position = Vector2(-17, 0)
+
+[node name="Area2D" type="Area2D" parent="." groups=["EnemyArea"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_5m1nl")
+debug_color = Color(0.980969, 0, 0.375128, 0.42)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("2_jye7j")

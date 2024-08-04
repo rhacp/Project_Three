@@ -50,7 +50,7 @@ animations = [{
 radius = 5.0
 height = 16.0
 
-[node name="Key" type="Area2D"]
+[node name="Key" type="Area2D" groups=["Key"]]
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_htuay")
@@ -58,7 +58,7 @@ script = ExtResource("1_htuay")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0gbdl")
 animation = &"idle"
-frame_progress = 0.932446
+frame_progress = 0.0758895
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708

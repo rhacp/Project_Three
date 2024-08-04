@@ -1,4 +1,5 @@
 @tool
+class_name Transition
 extends Area2D
 
 @export_enum("level_one", "level_two") var level = "level_one"

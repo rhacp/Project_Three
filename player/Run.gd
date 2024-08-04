@@ -14,24 +14,30 @@ func update(delta : float):
 	var direction = InputManager.get_direction()
 	
 	# movement
-	if (direction):
+	if (direction && player.ignore_input == false):
 		player.velocity.x = direction * player.SPEED
 		animated_sprite_2d.play("run")
 	
-	if (!direction):
+	# transition to idle
+	if (!direction && player.ignore_input == false):
 		player.velocity.x = move_toward(player.velocity.x, 0, player.SPEED)
 		#player.velocity.x = 0
-		animated_sprite_2d.play("idle")
+		#animated_sprite_2d.play("idle")
+		transition.emit("Idle")
 		
 	# change animation
-	if (direction == -1):
+	if (direction == -1 && player.ignore_input == false):
 		animated_sprite_2d.flip_h = true
-	if (direction == 1):
+	if (direction == 1 && player.ignore_input == false):
 		animated_sprite_2d.flip_h = false
 		
 	# transition to jump
 	if (InputManager.get_input_jump()):
 		transition.emit("Jump")
+		
+	# change to death state
+	if (player.death_check):
+		transition.emit("Death")
 		
 	# transition to fall
 	#if (!player.is_on_floor()):

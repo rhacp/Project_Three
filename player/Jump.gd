@@ -29,13 +29,13 @@ func update(delta : float):
 	var direction = InputManager.get_direction()
 	
 	# movement in air
-	if (direction):
+	if (direction && player.ignore_input == false):
 		player.velocity.x = direction * player.SPEED
 		
 	# change animation in air
-	if (direction == -1):
+	if (direction == -1 && player.ignore_input == false):
 		animated_sprite_2d.flip_h = true
-	if (direction == 1):
+	if (direction == 1 && player.ignore_input == false):
 		animated_sprite_2d.flip_h = false
 		
 	# transition to fall

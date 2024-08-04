@@ -7,3 +7,6 @@ static func get_direction() -> float:
 
 static func get_input_jump() -> bool:
 	return Input.is_action_just_pressed("jump")
+
+static func get_input_damage() -> bool:
+	return Input.is_action_just_pressed("damage")
