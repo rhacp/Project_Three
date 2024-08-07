@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://8hqxwgqb6u8j"]
+[gd_scene load_steps=27 format=3 uid="uid://8hqxwgqb6u8j"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_nodde"]
 [ext_resource type="Texture2D" uid="uid://d4fx7v5mfjsus" path="res://assets/player/player.png" id="1_ywiw1"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://player/Jump.gd" id="5_11cav"]
 [ext_resource type="Script" path="res://player/Fall.gd" id="6_d2ren"]
 [ext_resource type="Script" path="res://player/Death.gd" id="8_tvycf"]
+
+[sub_resource type="Theme" id="Theme_o40ht"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7lpj4"]
 atlas = ExtResource("1_ywiw1")
@@ -154,6 +156,13 @@ offset_bottom = -125.0
 max_value = 20.0
 step = 1.0
 show_percentage = false
+
+[node name="Label" type="Label" parent="."]
+offset_left = -96.0
+offset_top = -139.0
+offset_right = -56.0
+offset_bottom = -116.0
+theme = SubResource("Theme_o40ht")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_h20q1")

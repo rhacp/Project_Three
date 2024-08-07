@@ -20,6 +20,11 @@ config/icon="res://icon.svg"
 InputManager="*res://global/input_manager.gd"
 TransitionManager="*res://global/transition_manager.gd"
 
+[display]
+
+window/size/mode=2
+window/stretch/mode="viewport"
+
 [input]
 
 move_left={

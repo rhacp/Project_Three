@@ -2,10 +2,14 @@ class_name Player
 extends CharacterBody2D
 
 @onready var health_bar = $HealthBar
+@onready var label = $Label
 
 const gravity = 980.0
 const JUMP_VELOCITY = -250.0
 const SPEED = 300.0
+
+@export_group("Points")
+@export var points_value : int = 0
 
 @export_group("Health")
 @export var health_max_value : int = 20
@@ -22,6 +26,10 @@ var ignore_input : bool = false
 
 func _ready():
 	health_ready()
+	points_ready()
+	
+func points_ready():
+	label.text = str(points_value)
 
 # ready the health bar
 func health_ready():
@@ -42,6 +50,11 @@ func _physics_process(delta):
 	
 	death()
 	#print(ignore_input)
+	
+func pick_up_coin(message : String) -> void:
+	points_value += 1
+	label.text = str(points_value)
+	print(message)
 	
 # check if the player has the key
 func has_key():
