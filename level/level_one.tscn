@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dws1f82iiqgdg"]
+[gd_scene load_steps=11 format=3 uid="uid://dws1f82iiqgdg"]
 
 [ext_resource type="Texture2D" uid="uid://cvwgom0gtmqpy" path="res://assets/tiles/tileset.png" id="1_ioh24"]
 [ext_resource type="PackedScene" uid="uid://8hqxwgqb6u8j" path="res://player/player.tscn" id="2_cagv1"]
 [ext_resource type="Texture2D" uid="uid://cly658fgi538b" path="res://assets/tiles/Medieval_props_free.png" id="2_lrshj"]
 [ext_resource type="PackedScene" uid="uid://cu4rcvediys2v" path="res://level/utils/transition.tscn" id="3_3ltlu"]
 [ext_resource type="PackedScene" uid="uid://dksgf05htwgag" path="res://level/utils/key.tscn" id="4_kep6m"]
+[ext_resource type="PackedScene" uid="uid://dvl1iyvs6ra83" path="res://UI/u_iv_1.tscn" id="5_atmvg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ymty4"]
 texture = ExtResource("2_lrshj")
@@ -598,8 +599,9 @@ sources/0 = SubResource("TileSetAtlasSource_yawxc")
 
 [node name="Level_One" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("2_cagv1")]
-position = Vector2(153, 38)
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UIv1" parent="CanvasLayer" instance=ExtResource("5_atmvg")]
 
 [node name="Node" type="Node" parent="."]
 
@@ -620,3 +622,7 @@ position = Vector2(447, 143)
 
 [node name="Key" parent="." instance=ExtResource("4_kep6m")]
 position = Vector2(816, 154)
+
+[node name="Player" parent="." instance=ExtResource("2_cagv1")]
+visible = false
+position = Vector2(153, 38)

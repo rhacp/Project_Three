@@ -63,3 +63,7 @@ damage={
 2d_physics/layer_6="transition"
 2d_physics/layer_7="player_area"
 2d_physics/layer_8="enemy_area"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

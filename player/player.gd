@@ -23,6 +23,7 @@ var key : bool = false
 var death_check : bool
 var bounce_player : bool = false
 var ignore_input : bool = false
+# var current_health
 
 func _ready():
 	health_ready()

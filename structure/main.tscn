@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbhxy1uyonupv"]
+
+[ext_resource type="PackedScene" uid="uid://dws1f82iiqgdg" path="res://level/level_one.tscn" id="1_bxlas"]
+[ext_resource type="PackedScene" uid="uid://8hqxwgqb6u8j" path="res://player/player.tscn" id="2_ly2jt"]
+[ext_resource type="Script" path="res://structure/PlayerCamera.gd" id="2_mun3m"]
+
+[node name="Main" type="Node2D"]
+
+[node name="ManagerContainer" type="Node" parent="."]
+
+[node name="LevelContainer" type="Node" parent="."]
+
+[node name="Level_One" parent="LevelContainer" instance=ExtResource("1_bxlas")]
+
+[node name="CameraContainer" type="Node" parent="."]
+
+[node name="PlayerCamera" type="Camera2D" parent="CameraContainer" node_paths=PackedStringArray("player")]
+zoom = Vector2(2, 2)
+script = ExtResource("2_mun3m")
+player = NodePath("../../EntityContainer/Player")
+
+[node name="UIContainer" type="CanvasLayer" parent="."]
+
+[node name="EntityContainer" type="Node" parent="."]
+
+[node name="Player" parent="EntityContainer" instance=ExtResource("2_ly2jt")]
+position = Vector2(137, 92)
